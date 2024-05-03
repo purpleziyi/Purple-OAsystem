@@ -5,8 +5,9 @@ from datetime import datetime
 from .authentications import generate_jwt
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .serializers import ResetPwdSerializer
-from rest_framework import status    # 导入状态码
+from rest_framework import status
 
 
 # Create your views here.

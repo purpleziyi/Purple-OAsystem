@@ -35,26 +35,27 @@ INSTALLED_APPS = [
     # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',   # 记录了model以及迁移脚本之间的关系
-    # 'django.contrib.sessions',       # 项目中没有用到session
+    'django.contrib.sessions',       # 项目中没有用到session
     # 'django.contrib.messages',       # 这个在前后端分离项目中是最无用的一项
     'django.contrib.staticfiles',
      # 安装rest_framework
     'rest_framework',
     'corsheaders',
     # 项目的app
-    'apps.oaauth'
+    'apps.oaauth',
+    'apps.absent'
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware',   # 没有用到sesssion的话则注释掉
+    'django.contrib.sessions.middleware.SessionMiddleware',   # 没有用到sesssion的话则注释掉
     # 一定要在CommonMiddleware前面
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
      # 关闭CSRF保护, 因为现在前端是通过vue来渲染的而不是template了，而且之后的验证方式是jwt而不是cookie
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',  # 该工作我们在自己的middlewares.py中已经完成
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # 该工作我们在自己的middlewares.py中已经完成
     # 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'apps.oaauth.middlewares.LoginCheckMiddleware'     # 自己的中间件内容
@@ -149,6 +150,4 @@ AUTH_USER_MODEL = 'oaauth.OAUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ['apps.oaauth.authentications.UserTokenAuthentication'],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
 }
