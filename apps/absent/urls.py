@@ -12,6 +12,6 @@ router.register('absent', views.AbsentViewSet, basename='absent')  #注册router
 
 urlpatterns = [
     # http://localhost:8000/absent/type
-    # path('type', views.AbsentTypeView.as_view(), name='absenttypes'),
-    # path('responder', views.ResponderView.as_view(), name='getresponder')
+    path('type', views.AbsentTypeView.as_view(), name='absenttypes'),
+    path('responder', views.ResponderView.as_view(), name='getresponder')
 ] + router.urls
