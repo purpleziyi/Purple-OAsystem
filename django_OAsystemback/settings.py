@@ -32,11 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.contenttypes',   # 记录了model以及迁移脚本之间的关系
+    # 'django.contrib.sessions',       # 项目中没有用到session
+    # 'django.contrib.messages',       # 这个在前后端分离项目中是最无用的一项
     'django.contrib.staticfiles',
      # 安装rest_framework
     'rest_framework',
@@ -48,15 +48,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',   # 没有用到sesssion的话则注释掉
     # 一定要在CommonMiddleware前面
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
      # 关闭CSRF保护, 因为现在前端是通过vue来渲染的而不是template了，而且之后的验证方式是jwt而不是cookie
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',  # 该工作我们在自己的middlewares.py中已经完成
+    # 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.oaauth.middlewares.LoginCheckMiddleware'     # 自己的中间件内容
 ]
 
 ROOT_URLCONF = 'django_OAsystemback.urls'
@@ -72,7 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                # 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -145,3 +146,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 # 'app.User模型名'
 # cannot write like:  AUTH_USER_MODEL = 'apps.oaauth.models.OAUser'
 AUTH_USER_MODEL = 'oaauth.OAUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ['apps.oaauth.authentications.UserTokenAuthentication'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

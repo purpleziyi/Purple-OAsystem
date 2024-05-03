@@ -42,7 +42,7 @@ class JWTAuthentication(BaseAuthentication):
                 # 绑定当前user到request对象上
                 user = OAUser.objects.get(pk=userid)
                 setattr(request,'user', user)
-                return user, jwt_token
+
             except:
                 msg = 'User does not exist!'
                 raise exceptions.AuthenticationFailed(msg)
