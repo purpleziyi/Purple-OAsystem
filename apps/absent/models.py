@@ -38,3 +38,5 @@ class Absent(models.Model):
     # 10. 审批回复内容
     response_content = models.TextField(blank=True)
 
+    class Meta:
+        ordering = ('-create_time',)   # 按照时间从大到小来排序，也就是最新的排在最前面 ，所以在create_time前加一个负号

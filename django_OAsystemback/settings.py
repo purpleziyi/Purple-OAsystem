@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     # 项目的app
     'apps.oaauth',
-    'apps.absent'
+    'apps.absent',
+    'apps.inform'
 
 ]
 
@@ -150,6 +151,8 @@ AUTH_USER_MODEL = 'oaauth.OAUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ['apps.oaauth.authentications.UserTokenAuthentication'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 APPEND_SLASH=False
