@@ -7,23 +7,33 @@ The system features include **attendance management**, **notification management
 <br/> 
 **screenshot**
 <br/> 
-**login**
+login
 ![login](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/043ad51e-6691-4956-ad7e-66f4a1c91409)
 
 <br/> 
-**Personal attendance**
-![personal attendance](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/65c81450-4b82-4095-98c1-3384d2b55fc6)
+Personal attendance 
+
+![personal attendance](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/33adf302-2229-4e0e-9c5f-096c4df2171a)
+
+
 
 <br/> 
-**Subordinate attendance**
-![Subordinate attendance](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/379a8327-f419-446e-99a9-6fcf17c58f77)
+Subordinate attendance
+
+![Subordinate attendance](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/83c81b5b-0519-474d-9ce4-6ebc95c57df7)
 
 
 <br/> 
-**Publish Notification**
-![Publish Notification](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/a43e5659-5cf3-4e76-b552-eb72fb597ded)
-**Publish Notification（with dropdown-menu）**
-![Publish Notification（with dropdown-menu）](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/05f668ca-fc12-4f3f-bae8-b3c3657125a9)
+ Publish Notification 
+
+ ![Publish Notification](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/36b661b0-6da1-4b0c-a3d0-545a418082dc)
+
+<br/> 
+Publish Notification（with dropdown-menu）
+
+![Publish Notification（with dropdown-menu）](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/72fc9a7c-f62a-49bb-9faf-2d7ab961c0a6)
+
+
 
  
 
