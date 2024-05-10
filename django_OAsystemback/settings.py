@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # 项目的app
     'apps.oaauth',
     'apps.absent',
-    'apps.inform'
+    'apps.inform',
+    'apps.staff'
 
 ]
 
