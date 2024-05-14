@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from django.core.validators import FileExtensionValidator, get_available_image_extensions
 
-class UploadImageSerializer(serializers.ModelSerializer):
+class UploadImageSerializer(serializers.Serializer):
     # ImageField：会校验上传的文件是否是图片
     # .png/.jpeg/jpg
-    image = serializers.ImageField(
+    image = serializers.ImageField(   # 注意，此处的image就是以后Body中的字段名了
         validators=[FileExtensionValidator(['png', 'jpg', 'jpeg', 'gif'])],# 文件后缀名验证器
         error_messages={'required': 'Please upload pictures!', 'invalid_image': 'Upload a valid image!'} #请上传图片！
 
