@@ -20,7 +20,7 @@ class Inform(models.Model):
     class Meta:
         ordering = ("-create_time",)   # 根据创建时间来倒序排列，即最新的排在最上方
 
-# 记录用户查看过哪些通知
+# 记录用户查看过哪些通知,与前端“阅读量”views相关
 class InformRead(models.Model):
     inform = models.ForeignKey(Inform, on_delete=models.CASCADE, related_name='reads', related_query_name='reads')
     user = models.ForeignKey(OAUser, on_delete=models.CASCADE, related_name='reads', related_query_name='reads')
