@@ -3,13 +3,18 @@ from .models import Inform, InformRead
 from apps.oaauth.serializers import UserSerializer, DepartmentSerializer
 from apps.oaauth.models import OADepartment
 
-
+class InformReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InformRead
+        fields = "__all__"
 
 class InformSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     departments = DepartmentSerializer(many=True, read_only=True)
     # department_ids 是一个包含了部门id的列表，后端若要接收列表，就需要用到ListField
     department_ids = serializers.ListField( write_only=True)   # 校验时会用到，将模型序列化字典时不需要用到该字段
+    reads = InformReadSerializer(many=True, read_only=True)
+
 
     class Meta:
          model = Inform

@@ -164,3 +164,12 @@ REST_FRAMEWORK = {
 }
 
 APPEND_SLASH=False
+
+# email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'zanezzy001@gmail.com'  #  Gmail邮箱地址
+EMAIL_HOST_PASSWORD = 'gsqv egoo ccqa wmfp'  #  应用程序密码
+DEFAULT_FROM_EMAIL = 'zanezzy001@gmail.com'
