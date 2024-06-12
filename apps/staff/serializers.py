@@ -20,3 +20,23 @@ class AddStaffSerializer(serializers.Serializer):
         if request.user.department.leader.uid != request.user.uid:
             raise serializers.ValidationError('If you are not a department leader, you cannot add employees!')
         return attrs  # 一切正常的话就返回属性
+
+class ActiveStaffSerializer(serializers.Serializer):
+    email = serializers.EmailField(error_messages={"required": "please input your email", 'invalid': 'Please enter the correct email address!'})
+    password = serializers.CharField(max_length=20, error_messages={"required": 'Please enter your password!'})
+
+    def validate(self, attrs):
+        email = attrs['email']
+        password = attrs['password']
+        user = OAUser.objects.filter(email=email).first()
+        if not user or not user.check_password(password):
+            raise serializers.ValidationError("Email or password is incorrect!")  #邮箱或密码错误！
+        attrs['user'] = user
+        return attrs
+
+
+class StaffUploadSerializer(serializers.Serializer):
+    file = serializers.FileField(
+        validators=[FileExtensionValidator(['xlsx', 'xls'])],
+        error_messages={'required': 'Please upload a file!'}  #请上传文件！
+    )

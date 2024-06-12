@@ -24,3 +24,28 @@ you should set broker_connection_retry_on_startup to True.
 2024-06-12 17:03:33,123 - celery.worker.strategy - INFO - Task django_OAsystemback.celery.debug_task[237751e8-809a-41e8-8c62-2ac32320af2d] received
 2024-06-12 17:03:33,125 - celery.redirected - WARNING - Request: <Context: {'lang': 'py', 'task': 'django_OAsystemback.celery.debug_task', 'id': '237751e8-809a-41e8-8c62-2ac32320af2d', 'shadow': None, 'eta': None, 'expires': None, 'group': None, 'group_index': None, 'retries': 0, 'timelimit': [None, None], 'root_id': '237751e8-809a-41e8-8c62-2ac32320af2d', 'parent_id': None, 'argsrepr': '()', 'kwargsrepr': '{}', 'origin': 'gen12820@LAPTOP-A43TG9IK', 'ignore_result': True, 'replaced_task_nesting': 0, 'stamped_headers': None, 'stamps': {}, 'properties': {'correlation_id': '237751e8-809a-41e8-8c62-2ac32320af2d', 'reply_to': 'f97f05e6-132e-379e-9949-c799b62d013b', 'delivery_mode': 2, 'delivery_info': {'exchange': '', 'routing_key': 'celery'}, 'priority': 0, 'body_encoding': 'base64', 'delivery_tag': '161b426f-1c77-4e17-8eba-0421b53e567e'}, 'reply_to': 'f97f05e6-132e-379e-9949-c799b62d013b', 'correlation_id': '237751e8-809a-41e8-8c62-2ac32320af2d', 'hostname': 'celery@LAPTOP-A43TG9IK', 'delivery_info': {'exchange': '', 'routing_key': 'celery', 'priority': 0, 'redelivered': False}, 'args': [], 'kwargs': {}, 'is_eager': False, 'callbacks': None, 'errbacks': None, 'chain': None, 'chord': None, 'called_directly': False, 'headers': None, '_protected': 1}>
 2024-06-12 17:03:33,142 - celery.app.trace - INFO - Task django_OAsystemback.celery.debug_task[237751e8-809a-41e8-8c62-2ac32320af2d] succeeded in 0.015000000013969839s: None
+2024-06-12 21:11:08,764 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-12 21:11:08,787 - celery.worker.consumer.connection - INFO - Connected to redis://127.0.0.1:6379/1
+2024-06-12 21:11:08,788 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-12 21:11:08,793 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2024-06-12 21:11:09,821 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2024-06-12 21:11:09,827 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-12 21:11:09,835 - celery.worker.pidbox - INFO - pidbox: Connected to redis://127.0.0.1:6379/1.
+2024-06-12 21:11:09,849 - celery.apps.worker - INFO - celery@LAPTOP-A43TG9IK ready.
+2024-06-12 21:11:50,254 - celery.worker.strategy - INFO - Task send_mail_task[6700f62c-9280-45bc-a43e-05f4a505e005] received
+2024-06-12 21:11:51,920 - celery.app.trace - INFO - Task send_mail_task[6700f62c-9280-45bc-a43e-05f4a505e005] succeeded in 1.6709999999729916s: None

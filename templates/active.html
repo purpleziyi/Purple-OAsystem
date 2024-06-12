@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PurpleOA-Account Activation</title>
+    <link href="{% static 'bootstrap5/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .form-signin {
+            max-width: 330px;
+            padding: 1rem;
+        }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+</head>
+
+<body class="mt-5 bg-body-tertiary">
+    <main class="form-signin w-100 m-auto">
+        <form method="POST">
+            <h1 class="h3 mb-3 fw-normal">PurpleOA-Activation</h1> <!-- 员工激活 -->
+            <div class="form-floating">
+                <input name="email" type="email" class="form-control" id="emailInput" placeholder="please input your email"><!-- 输入邮箱 -->
+                <label for="emailInput">Email</label><!-- 邮箱 -->
+            </div>
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Please enter your password"><!-- 请输入密码 -->
+                <label for="passwordInput">Password</label><!-- 密码 -->
+            </div>
+            <button class="btn btn-primary w-100 py-2" type="submit" id="submit-btn">Activate</button><!-- 激活 -->
+        </form>
+    </main>
+
+    <script>
+        $("#submit-btn").on('click', function(event){
+            event.preventDefault()  // 阻止默认行为，否则会自动发送form中的数据给server
+            let email = $("#emailInput").val()  // 获取邮箱
+            let password = $("#passwordInput").val()
+            let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if(!emailRegex.test(email)){
+                alert("Please enter the correct email address!")  // 请输入正确格式的邮箱 
+                return;
+            }
+            if(!password || password.length < 6){
+                alert("Please enter a password of at least 6 digits!")  // 请输入最少6位的密码！
+                return;
+            }
+            // $post 表示发送post请求， post的三个参数分别是：URL，post请求传递来的数据，回调函数
+            $.post("/staff/active", {email, password}, function (result){  
+                if(result.code == 200){
+                    alert("Activation successful!")  // 激活成功！
+                    window.location = "/"  // 跳转到首页
+                }else{
+                    alert(result.message)
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
