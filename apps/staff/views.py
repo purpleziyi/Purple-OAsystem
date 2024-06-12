@@ -10,7 +10,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from utils import aeser
 from django.urls import reverse  #将view的名字反转成链接
-
+from django_OAsystemback.celery import debug_task
+from .tasks import send_mail_task
 
 
 OAUser = get_user_model()
@@ -64,4 +65,12 @@ class StaffView(APIView):
         # 针对邮箱要进行加密：AES
         # http://localhost:8000/staff/active?token=4dFLaXTbbzciZKGm0LIafmhOuuW11S+7kEtqdUSeFf4=
         message = f"Please click the following link to activate your account: {active_url}"  #账号激活
-        send_mail(f'[purpleOA] Account activation', recipient_list=[email], message=message, from_email=settings.DEFAULT_FROM_EMAIL)
+        subject = f'[purpleOA] Account activation'
+        # send_mail(subject, recipient_list=[email], message=message, from_email=settings.DEFAULT_FROM_EMAIL)
+        send_mail_task.delay(email, subject, message)
+
+class TestCeleryView(APIView):
+    def get(self, request):
+        # 用celery异步执行debug_task这个任务
+        debug_task.delay()
+        return Response({"detail": "successfully!"})

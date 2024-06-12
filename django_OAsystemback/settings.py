@@ -173,3 +173,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'zanezzy001@gmail.com'  #  Gmail邮箱地址
 EMAIL_HOST_PASSWORD = 'gsqv egoo ccqa wmfp'  #  应用程序密码
 DEFAULT_FROM_EMAIL = 'zanezzy001@gmail.com'
+
+# CELERY相关配置
+# 中间人的配置
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
+# 指定结果的接受地址
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/2'
