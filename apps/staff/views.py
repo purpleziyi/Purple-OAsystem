@@ -20,13 +20,13 @@ from rest_framework import generics
 from rest_framework import exceptions
 from apps.oaauth.serializers import UserSerializer
 from .paginations import StaffListPagination
-# from rest_framework import viewsets
-# from rest_framework import mixins
-# from datetime import datetime
-# import json
-# import pandas as pd
-# from django.http.response import HttpResponse
-# from django.db import transaction
+from rest_framework import viewsets
+from rest_framework import mixins
+from datetime import datetime
+import json
+import pandas as pd
+from django.http.response import HttpResponse
+from django.db import transaction
 
 
 OAUser = get_user_model()
@@ -72,9 +72,13 @@ class ActiveStaffView(View):
             print(e)
             return JsonResponse({"code": 400, "message": "token error!"})
 
-
-class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取列表GET 和创建模型对象POST 两个请求
-
+# put /staff/staff/<uid>
+class StaffViewSet(
+    viewsets.GenericViewSet,
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.UpdateModelMixin
+):
     queryset = OAUser.objects.all()
     pagination_class = StaffListPagination
 
@@ -86,9 +90,9 @@ class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取�
 
     # 获取员工列表
     def get_queryset(self):
-        # department_id = self.request.query_params.get('department_id')
-        # realname = self.request.query_params.get('realname')
-        # date_joined = self.request.query_params.getlist('date_joined[]')
+        department_id = self.request.query_params.get('department_id')
+        username = self.request.query_params.get('username')
+        date_joined = self.request.query_params.getlist('date_joined[]')
 
         queryset = self.queryset
         # 返回员工列表逻辑：
@@ -102,21 +106,21 @@ class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取�
             else:  # 是部门的leader
                 queryset = queryset.filter(department_id=user.department_id)  # 过滤出当部门id是前用户所在部门id
 
-        # else:
-        #     # 董事会中，根据部门id进行过滤
-        #     if department_id:
-        #         queryset = queryset.filter(department_id=department_id)
-        #
-        # if realname:
-        #     queryset = queryset.filter(realname__icontains=realname)
-        # if date_joined:
-        #     # ['2024-10-01', '2024-10-10']
-        #     try:
-        #         start_date = datetime.strptime(date_joined[0], "%Y-%m-%d")
-        #         end_date = datetime.strptime(date_joined[1], "%Y-%m-%d")
-        #         queryset = queryset.filter(date_joined__range=(start_date, end_date))
-        #     except Exception:
-        #         pass
+        else:
+            # 董事会中，根据部门id进行过滤
+            if department_id:
+                queryset = queryset.filter(department_id=department_id)
+
+        if username:  # filter username
+            queryset = queryset.filter(username__icontains=username)
+        if date_joined:
+            # ['2024-10-01', '2024-10-10']
+            try:
+                start_date = datetime.strptime(date_joined[0], "%Y-%m-%d")
+                end_date = datetime.strptime(date_joined[1], "%Y-%m-%d")
+                queryset = queryset.filter(date_joined__range=(start_date, end_date))
+            except Exception:
+                pass
         return queryset.order_by("-date_joined").all()   # 不排序的话运行时会出现警告
 
 
@@ -144,6 +148,10 @@ class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取�
         else:
             return Response(data={'detail': list(serializer.errors.values())[0][0]}, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True  # 只更新局部，不必全部更新
+        return super().update(request, *args, **kwargs)
+
 
 
     def send_active_email(self, email):
@@ -160,6 +168,42 @@ class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取�
         subject = f'[purpleOA] Account activation'
         # send_mail(subject, recipient_list=[email], message=message, from_email=settings.DEFAULT_FROM_EMAIL)
         send_mail_task.delay(email, subject, message)
+
+class StaffDownloadView(APIView):
+    def get(self, request):
+        # /staff/download?pks=[x,y]
+        # ['x','y'] -> json格式的字符串
+        pks = request.query_params.get('pks')
+        try:
+            pks = json.loads(pks)
+        except Exception:
+            return Response({"detail": "Employee parameter error!"}, status=status.HTTP_400_BAD_REQUEST)  # 员工参数错误
+
+        try:
+            current_user = request.user
+            queryset = OAUser.objects
+            if current_user.department.name != 'Board':
+                if current_user.department.leader_id != current_user.uid:  # 既不是董事会的，也不是该部门的leader，就没有权限
+                    return Response({'detail': "No permission to download!"}, status=status.HTTP_403_FORBIDDEN)  # 没有权限下载！
+                else:
+                    # 如果是部门的leader，那么就先过滤为本部门的员工
+                    queryset = queryset.filter(department_id=current_user.department_id)
+            queryset = queryset.filter(pk__in=pks)
+            result = queryset.values("username", "email", "department__name", 'date_joined', 'status')  # 查找的时候如果是通过外键的话需要加两个_
+            staff_df = pd.DataFrame(list(result))  # 将result转为DataFrame对象
+            # staff_df = staff_df.rename(
+            #     columns={"username": "Username", "email": 'Email', 'department__name': 'Department', "date_joined": 'Joining date',
+            #              'status': 'Status'})  # 英文版可能并不需要！
+            response = HttpResponse(content_type='application/xlsx')  # 返回的数据类型
+            response['Content-Disposition'] = "attachment; filename=Employee Information.xlsx"  # 表示这个文件是作为附件形式来下载的，且名为“员工信息.xlsx”
+            # 把staff_df写入到Response中
+            with pd.ExcelWriter(response) as writer:  # 使用pandas的ExcelWriter创建一个writer对象，writer对象负责写
+                staff_df.to_excel(writer, sheet_name='Employee Information')  # 将staff_df写入到excel文件中
+            return response
+        except Exception as e:
+            print(e)
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class TestCeleryView(APIView):
     def get(self, request):

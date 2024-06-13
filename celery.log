@@ -843,3 +843,28 @@ you should set broker_connection_retry_on_startup to True.
   warnings.warn(
 
 2024-06-13 11:15:12,776 - celery.worker.pidbox - INFO - pidbox: Connected to redis://127.0.0.1:6379/1.
+2024-06-13 11:58:58,273 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:58:58,295 - celery.worker.consumer.connection - INFO - Connected to redis://127.0.0.1:6379/1
+2024-06-13 11:58:58,297 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:58:58,303 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2024-06-13 11:58:59,331 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2024-06-13 11:58:59,337 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:58:59,345 - celery.worker.pidbox - INFO - pidbox: Connected to redis://127.0.0.1:6379/1.
+2024-06-13 11:58:59,360 - celery.apps.worker - INFO - celery@LAPTOP-A43TG9IK ready.
+2024-06-13 12:07:54,082 - celery.worker.strategy - INFO - Task send_mail_task[95ad5edf-ed35-40f8-84a9-c78ca4d1ce12] received
+2024-06-13 12:07:55,318 - celery.app.trace - INFO - Task send_mail_task[95ad5edf-ed35-40f8-84a9-c78ca4d1ce12] succeeded in 1.2349999999860302s: None
