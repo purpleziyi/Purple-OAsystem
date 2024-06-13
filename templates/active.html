@@ -71,7 +71,7 @@
             $.post("/staff/active", {email, password}, function (result){  
                 if(result.code == 200){
                     alert("Activation successful!")  // 激活成功！
-                    window.location = "/"  // 跳转到首页
+                    window.location = "/"  // 跳转到首页（简单设计）
                 }else{
                     alert(result.message)
                 }

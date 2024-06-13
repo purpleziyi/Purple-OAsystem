@@ -49,3 +49,797 @@ you should set broker_connection_retry_on_startup to True.
 2024-06-12 21:11:09,849 - celery.apps.worker - INFO - celery@LAPTOP-A43TG9IK ready.
 2024-06-12 21:11:50,254 - celery.worker.strategy - INFO - Task send_mail_task[6700f62c-9280-45bc-a43e-05f4a505e005] received
 2024-06-12 21:11:51,920 - celery.app.trace - INFO - Task send_mail_task[6700f62c-9280-45bc-a43e-05f4a505e005] succeeded in 1.6709999999729916s: None
+2024-06-13 00:29:18,659 - celery.worker.strategy - INFO - Task send_mail_task[ce1dc210-87e6-444e-aafa-d2816b1461a8] received
+2024-06-13 00:29:20,375 - celery.app.trace - INFO - Task send_mail_task[ce1dc210-87e6-444e-aafa-d2816b1461a8] succeeded in 1.6869999999180436s: None
+2024-06-13 01:45:15,010 - celery.worker.strategy - INFO - Task send_mail_task[5c228bc1-21ac-437f-a0ac-4c93e1026341] received
+2024-06-13 01:45:16,542 - celery.app.trace - INFO - Task send_mail_task[5c228bc1-21ac-437f-a0ac-4c93e1026341] succeeded in 1.5309999999590218s: None
+2024-06-13 11:14:24,881 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:14:24,905 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:25,190 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 512, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,304 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,449 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,496 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+2024-06-13 11:14:25,534 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\socket.py", line 65, in _read_from_socket
+    data = self._sock.recv(socket_read_size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,583 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 660, in recv
+    return self._sock.recv(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,704 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:25,713 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:25,722 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:14:25,726 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:25,743 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 746, in start
+    c.loop(*c.loop_args())
+2024-06-13 11:14:25,775 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\loops.py", line 130, in synloop
+    connection.drain_events(timeout=2.0)
+2024-06-13 11:14:25,779 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 341, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,786 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+2024-06-13 11:14:25,791 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 591, in get
+    ret = self.handle_event(fileno, event)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,800 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 573, in handle_event
+    return self.on_readable(fileno), self
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,805 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 569, in on_readable
+    chan.handlers[type]()
+2024-06-13 11:14:25,813 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 962, in _brpop_read
+    dest__item = self.client.parse_response(self.client.connection,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,818 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 562, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,829 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 520, in read_response
+    raise ConnectionError(
+2024-06-13 11:14:25,868 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:25,892 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:25,909 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:14:25,936 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:25,963 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 1306-1322: character maps to <undefined>
+2024-06-13 11:14:26,058 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:14:26,140 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:14:26,240 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:14:26,253 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:14:26,365 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:14:26,483 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:14:26,693 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:14:26,811 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:14:26,925 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:14:27,019 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:14:27,169 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:14:27,361 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:14:27,507 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:14:27,578 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:14:27,615 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:14:27,679 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:27,763 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:14:27,783 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 361, in start
+    self.on_connection_error_after_connected(exc)
+2024-06-13 11:14:27,792 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 378, in on_connection_error_after_connected
+    warn(CONNECTION_RETRY, exc_info=True)
+2024-06-13 11:14:27,810 - celery.redirected - WARNING - Message: 'consumer: Connection to broker lost. Trying to re-establish the connection...'
+Arguments: ()
+2024-06-13 11:14:30,201 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:30,215 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 512, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,223 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,224 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,227 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+2024-06-13 11:14:30,231 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\_parsers\socket.py", line 65, in _read_from_socket
+    data = self._sock.recv(socket_read_size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,244 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 660, in recv
+    return self._sock.recv(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,285 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:30,314 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:30,322 - celery.redirected - WARNING -   File "src\\gevent\\_waiter.py", line 122, in gevent._gevent_c_waiter.Waiter.switch
+2024-06-13 11:14:30,324 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\pidbox.py", line 118, in loop
+    connection.drain_events(timeout=1.0)
+2024-06-13 11:14:30,326 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 341, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,330 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+2024-06-13 11:14:30,335 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 591, in get
+    ret = self.handle_event(fileno, event)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,337 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 573, in handle_event
+    return self.on_readable(fileno), self
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,348 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 569, in on_readable
+    chan.handlers[type]()
+2024-06-13 11:14:30,349 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 913, in _receive
+    ret.append(self._receive_one(c))
+               ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,373 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 923, in _receive_one
+    response = c.parse_response()
+               ^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,381 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 837, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,391 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 813, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,394 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 49, in call_with_retry
+    fail(error)
+2024-06-13 11:14:30,404 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 815, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,406 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 802, in _disconnect_raise_connect
+    raise error
+2024-06-13 11:14:30,411 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:14:30,412 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 814, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,417 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 835, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:30,420 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 520, in read_response
+    raise ConnectionError(
+2024-06-13 11:14:30,436 - celery.redirected - WARNING - 2024-06-13T09:14:30Z
+2024-06-13 11:14:30,480 - celery.redirected - WARNING -  
+2024-06-13 11:14:30,527 - celery.redirected - WARNING - <built-in method switch of gevent._gevent_c_greenlet_primitives.TrackedRawGreenlet object at 0x000001DF8C480440> failed with ConnectionError
+2024-06-13 11:14:30,537 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:391: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2024-06-13 11:14:30,563 - celery.worker.consumer.consumer - INFO - Temporarily reducing the prefetch count to 4 to avoid over-fetching since 0 tasks are currently being processed.
+The prefetch count will be gradually restored to 0 as the tasks complete processing.
+2024-06-13 11:14:30,590 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:14:32,837 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:14:32,847 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:32,848 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,849 - celery.redirected - WARNING - IndexError: pop from empty list
+2024-06-13 11:14:32,849 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:32,850 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:32,852 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,854 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:14:32,856 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,858 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+2024-06-13 11:14:32,859 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+2024-06-13 11:14:32,860 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 590, in connect
+    self._internal_connect(address)
+2024-06-13 11:14:32,862 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 634, in _internal_connect
+    raise _SocketError(err, strerror(err))
+2024-06-13 11:14:32,880 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:32,881 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:32,884 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,886 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,889 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,890 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,904 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,906 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 744, in __init__
+    self.client.ping()
+2024-06-13 11:14:32,907 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\commands\core.py", line 1217, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,909 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,911 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+2024-06-13 11:14:32,911 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+2024-06-13 11:14:32,925 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:32,926 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:32,927 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:14:32,927 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:32,928 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 181-197: character maps to <undefined>
+2024-06-13 11:14:32,929 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:14:32,933 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:14:32,934 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:14:32,934 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:14:32,937 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:14:32,939 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:14:32,941 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:14:32,941 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:14:32,942 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:14:32,945 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:14:32,946 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:14:32,946 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:14:32,947 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:14:32,948 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:14:32,949 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:14:32,950 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:32,950 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:14:32,951 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:14:32,955 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:32,957 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\connection.py", line 21, in start
+    c.connection = c.connect()
+2024-06-13 11:14:32,958 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 470, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+2024-06-13 11:14:32,960 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 476, in connection_for_read
+    return self.ensure_connected(
+2024-06-13 11:14:32,963 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 527, in ensure_connected
+    conn = conn.ensure_connection(
+2024-06-13 11:14:32,964 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+2024-06-13 11:14:32,964 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+2024-06-13 11:14:32,965 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 326, in retry_over_time
+    tts = float(errback(exc, interval_range, retries) if errback
+2024-06-13 11:14:32,965 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 450, in on_error
+    errback(exc, interval)
+2024-06-13 11:14:32,966 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 493, in _error_handler
+    error(CONNECTION_ERROR, conn.as_uri(), exc, next_step)
+2024-06-13 11:14:37,314 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:14:37,319 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:37,320 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,321 - celery.redirected - WARNING - IndexError: pop from empty list
+2024-06-13 11:14:37,322 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:37,323 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:37,324 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,324 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:14:37,326 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,327 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+2024-06-13 11:14:37,328 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+2024-06-13 11:14:37,329 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 590, in connect
+    self._internal_connect(address)
+2024-06-13 11:14:37,330 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 634, in _internal_connect
+    raise _SocketError(err, strerror(err))
+2024-06-13 11:14:37,346 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:37,347 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:37,348 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,349 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,350 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,351 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,351 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,352 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 744, in __init__
+    self.client.ping()
+2024-06-13 11:14:37,353 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\commands\core.py", line 1217, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,353 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,354 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+2024-06-13 11:14:37,355 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+2024-06-13 11:14:37,371 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:37,372 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:37,373 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:14:37,375 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:37,376 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 181-197: character maps to <undefined>
+2024-06-13 11:14:37,376 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:14:37,380 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:14:37,381 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:14:37,383 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:14:37,384 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:14:37,386 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:14:37,386 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:14:37,387 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:14:37,389 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:14:37,391 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:14:37,392 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:14:37,393 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:14:37,393 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:14:37,394 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:14:37,394 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:14:37,395 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:37,395 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:14:37,396 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:14:37,397 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:37,397 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\connection.py", line 21, in start
+    c.connection = c.connect()
+2024-06-13 11:14:37,398 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 470, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+2024-06-13 11:14:37,398 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 476, in connection_for_read
+    return self.ensure_connected(
+2024-06-13 11:14:37,399 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 527, in ensure_connected
+    conn = conn.ensure_connection(
+2024-06-13 11:14:37,400 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+2024-06-13 11:14:37,400 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+2024-06-13 11:14:37,401 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 326, in retry_over_time
+    tts = float(errback(exc, interval_range, retries) if errback
+2024-06-13 11:14:37,402 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 450, in on_error
+    errback(exc, interval)
+2024-06-13 11:14:37,403 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 493, in _error_handler
+    error(CONNECTION_ERROR, conn.as_uri(), exc, next_step)
+2024-06-13 11:14:43,462 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:14:43,466 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:43,467 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,467 - celery.redirected - WARNING - IndexError: pop from empty list
+2024-06-13 11:14:43,467 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:43,468 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:43,468 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,469 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:14:43,469 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,469 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+2024-06-13 11:14:43,470 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+2024-06-13 11:14:43,470 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 590, in connect
+    self._internal_connect(address)
+2024-06-13 11:14:43,470 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 634, in _internal_connect
+    raise _SocketError(err, strerror(err))
+2024-06-13 11:14:43,481 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:43,482 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:43,484 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,484 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,484 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,485 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,486 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,486 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 744, in __init__
+    self.client.ping()
+2024-06-13 11:14:43,486 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\commands\core.py", line 1217, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,487 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,487 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+2024-06-13 11:14:43,487 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+2024-06-13 11:14:43,495 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:43,495 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:43,496 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:14:43,496 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:43,496 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 181-197: character maps to <undefined>
+2024-06-13 11:14:43,497 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:14:43,499 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:14:43,500 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:14:43,500 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:14:43,500 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:14:43,501 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:14:43,501 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:14:43,501 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:14:43,501 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:14:43,502 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:14:43,502 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:14:43,502 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:14:43,502 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:14:43,503 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:14:43,503 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:14:43,503 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:43,503 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:14:43,504 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:14:43,504 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:43,504 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\connection.py", line 21, in start
+    c.connection = c.connect()
+2024-06-13 11:14:43,504 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 470, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+2024-06-13 11:14:43,504 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 476, in connection_for_read
+    return self.ensure_connected(
+2024-06-13 11:14:43,505 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 527, in ensure_connected
+    conn = conn.ensure_connection(
+2024-06-13 11:14:43,505 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+2024-06-13 11:14:43,505 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+2024-06-13 11:14:43,505 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 326, in retry_over_time
+    tts = float(errback(exc, interval_range, retries) if errback
+2024-06-13 11:14:43,506 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 450, in on_error
+    errback(exc, interval)
+2024-06-13 11:14:43,506 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 493, in _error_handler
+    error(CONNECTION_ERROR, conn.as_uri(), exc, next_step)
+2024-06-13 11:14:51,564 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:14:51,567 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:51,567 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,568 - celery.redirected - WARNING - IndexError: pop from empty list
+2024-06-13 11:14:51,568 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:51,568 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:51,568 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,569 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:14:51,569 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,569 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+2024-06-13 11:14:51,569 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+2024-06-13 11:14:51,570 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 590, in connect
+    self._internal_connect(address)
+2024-06-13 11:14:51,570 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 634, in _internal_connect
+    raise _SocketError(err, strerror(err))
+2024-06-13 11:14:51,576 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:51,577 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:51,578 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,579 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,580 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,580 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,581 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,581 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 744, in __init__
+    self.client.ping()
+2024-06-13 11:14:51,582 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\commands\core.py", line 1217, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,582 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,582 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+2024-06-13 11:14:51,583 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+2024-06-13 11:14:51,591 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:14:51,592 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:14:51,592 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:14:51,592 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:14:51,592 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 181-197: character maps to <undefined>
+2024-06-13 11:14:51,593 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:14:51,595 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:14:51,596 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:14:51,596 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:14:51,597 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:14:51,597 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:14:51,597 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:14:51,598 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:14:51,598 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:14:51,598 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:14:51,599 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:14:51,599 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:14:51,599 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:14:51,600 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:14:51,600 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:14:51,600 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:51,600 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:14:51,601 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:14:51,601 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:14:51,601 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\connection.py", line 21, in start
+    c.connection = c.connect()
+2024-06-13 11:14:51,601 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 470, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+2024-06-13 11:14:51,601 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 476, in connection_for_read
+    return self.ensure_connected(
+2024-06-13 11:14:51,602 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 527, in ensure_connected
+    conn = conn.ensure_connection(
+2024-06-13 11:14:51,602 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+2024-06-13 11:14:51,602 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+2024-06-13 11:14:51,602 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 326, in retry_over_time
+    tts = float(errback(exc, interval_range, retries) if errback
+2024-06-13 11:14:51,603 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 450, in on_error
+    errback(exc, interval)
+2024-06-13 11:14:51,603 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 493, in _error_handler
+    error(CONNECTION_ERROR, conn.as_uri(), exc, next_step)
+2024-06-13 11:15:01,630 - celery.redirected - WARNING - --- Logging error ---
+2024-06-13 11:15:01,634 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:15:01,634 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
+    return self._avail_channels.pop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,635 - celery.redirected - WARNING - IndexError: pop from empty list
+2024-06-13 11:15:01,635 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:15:01,636 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:15:01,637 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,637 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+2024-06-13 11:15:01,638 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,638 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+2024-06-13 11:15:01,639 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+2024-06-13 11:15:01,639 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 590, in connect
+    self._internal_connect(address)
+2024-06-13 11:15:01,640 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\gevent\_socketcommon.py", line 634, in _internal_connect
+    raise _SocketError(err, strerror(err))
+2024-06-13 11:15:01,649 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:15:01,650 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:15:01,650 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,651 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
+    self._connection = self._establish_connection()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,652 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
+    conn = self.transport.establish_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,652 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
+    self._avail_channels.append(self.create_channel(self))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,652 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
+    channel = self.Channel(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,652 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\transport\redis.py", line 744, in __init__
+    self.client.ping()
+2024-06-13 11:15:01,653 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\commands\core.py", line 1217, in ping
+    return self.execute_command("PING", **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,654 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,654 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+2024-06-13 11:15:01,655 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+2024-06-13 11:15:01,664 - celery.redirected - WARNING - 
+During handling of the above exception, another exception occurred:
+2024-06-13 11:15:01,664 - celery.redirected - WARNING - Traceback (most recent call last):
+2024-06-13 11:15:01,665 - celery.redirected - WARNING -   File "D:\Python\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2024-06-13 11:15:01,665 - celery.redirected - WARNING -   File "D:\Python\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-06-13 11:15:01,666 - celery.redirected - WARNING - UnicodeEncodeError: 'charmap' codec can't encode characters in position 181-197: character maps to <undefined>
+2024-06-13 11:15:01,666 - celery.redirected - WARNING - Call stack:
+2024-06-13 11:15:01,669 - celery.redirected - WARNING -   File "<frozen runpy>", line 198, in _run_module_as_main
+2024-06-13 11:15:01,670 - celery.redirected - WARNING -   File "<frozen runpy>", line 88, in _run_code
+2024-06-13 11:15:01,670 - celery.redirected - WARNING -   File "D:\Python\Scripts\celery.exe\__main__.py", line 7, in <module>
+    sys.exit(main())
+2024-06-13 11:15:01,670 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\__main__.py", line 15, in main
+    sys.exit(_main())
+2024-06-13 11:15:01,670 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\celery.py", line 236, in main
+    return celery(auto_envvar_prefix="CELERY")
+2024-06-13 11:15:01,671 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+2024-06-13 11:15:01,671 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+2024-06-13 11:15:01,671 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+2024-06-13 11:15:01,672 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+2024-06-13 11:15:01,672 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+2024-06-13 11:15:01,672 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\click\decorators.py", line 33, in new_func
+    return f(get_current_context(), *args, **kwargs)
+2024-06-13 11:15:01,673 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\base.py", line 135, in caller
+    return f(ctx, *args, **kwargs)
+2024-06-13 11:15:01,673 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bin\worker.py", line 356, in worker
+    worker.start()
+2024-06-13 11:15:01,673 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\worker.py", line 202, in start
+    self.blueprint.start(self)
+2024-06-13 11:15:01,673 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:15:01,674 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 365, in start
+    return self.obj.start()
+2024-06-13 11:15:01,674 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 340, in start
+    blueprint.start(self)
+2024-06-13 11:15:01,675 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+2024-06-13 11:15:01,675 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\connection.py", line 21, in start
+    c.connection = c.connect()
+2024-06-13 11:15:01,676 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 470, in connect
+    conn = self.connection_for_read(heartbeat=self.amqheartbeat)
+2024-06-13 11:15:01,676 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 476, in connection_for_read
+    return self.ensure_connected(
+2024-06-13 11:15:01,677 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 527, in ensure_connected
+    conn = conn.ensure_connection(
+2024-06-13 11:15:01,677 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 406, in ensure_connection
+    self._ensure_connection(*args, **kwargs)
+2024-06-13 11:15:01,678 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
+    return retry_over_time(
+2024-06-13 11:15:01,678 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\utils\functional.py", line 326, in retry_over_time
+    tts = float(errback(exc, interval_range, retries) if errback
+2024-06-13 11:15:01,679 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\kombu\connection.py", line 450, in on_error
+    errback(exc, interval)
+2024-06-13 11:15:01,679 - celery.redirected - WARNING -   File "D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py", line 493, in _error_handler
+    error(CONNECTION_ERROR, conn.as_uri(), exc, next_step)
+2024-06-13 11:15:11,698 - celery.worker.consumer.connection - INFO - Connected to redis://127.0.0.1:6379/1
+2024-06-13 11:15:11,700 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:15:11,712 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2024-06-13 11:15:12,758 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2024-06-13 11:15:12,768 - py.warnings - WARNING - D:\Python\Lib\site-packages\celery\worker\consumer\consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+2024-06-13 11:15:12,776 - celery.worker.pidbox - INFO - pidbox: Connected to redis://127.0.0.1:6379/1.

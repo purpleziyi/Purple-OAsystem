@@ -16,10 +16,10 @@ from .tasks import send_mail_task
 from django.views import View
 from django.http.response import JsonResponse
 from urllib import parse
-# from rest_framework import generics
-# from rest_framework import exceptions
-# from apps.oaauth.serializers import UserSerializer
-# from .paginations import StaffListPagination
+from rest_framework import generics
+from rest_framework import exceptions
+from apps.oaauth.serializers import UserSerializer
+from .paginations import StaffListPagination
 # from rest_framework import viewsets
 # from rest_framework import mixins
 # from datetime import datetime
@@ -62,7 +62,7 @@ class ActiveStaffView(View):
                 user = serializer.validated_data.get('user')
                 if email != form_email:
                     return JsonResponse({"code": 400, "message": "Email error!"})
-                user.status = UserStatusChoices.ACTIVED
+                user.status = UserStatusChoices.ACTIVE
                 user.save()
                 return JsonResponse({"code": 200, "message": ""})
             else:
@@ -73,9 +73,55 @@ class ActiveStaffView(View):
             return JsonResponse({"code": 400, "message": "token error!"})
 
 
-class StaffView(APIView):
+class StaffView(generics.ListCreateAPIView): # ListCreateAPIView只实现获取列表GET 和创建模型对象POST 两个请求
+
+    queryset = OAUser.objects.all()
+    pagination_class = StaffListPagination
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET', 'PUT']:
+            return UserSerializer
+        else:
+            return AddStaffSerializer  # POST
+
+    # 获取员工列表
+    def get_queryset(self):
+        # department_id = self.request.query_params.get('department_id')
+        # realname = self.request.query_params.get('realname')
+        # date_joined = self.request.query_params.getlist('date_joined[]')
+
+        queryset = self.queryset
+        # 返回员工列表逻辑：
+        # 1. 如果是董事会的，那么返回所有员工
+        # 2. 如果不是董事会的，但是是部门的leader，那么就返回部门的员工
+        # 3. 如果不是董事会的，也不是部门leader，那么就抛出403 Forbidden错误
+        user = self.request.user  # get user-obj
+        if user.department.name != 'Board':  # 如果不是董事会，就判断是否为部门leader
+            if user.uid != user.department.leader.uid:
+                raise exceptions.PermissionDenied()  # 无访问权限
+            else:  # 是部门的leader
+                queryset = queryset.filter(department_id=user.department_id)  # 过滤出当部门id是前用户所在部门id
+
+        # else:
+        #     # 董事会中，根据部门id进行过滤
+        #     if department_id:
+        #         queryset = queryset.filter(department_id=department_id)
+        #
+        # if realname:
+        #     queryset = queryset.filter(realname__icontains=realname)
+        # if date_joined:
+        #     # ['2024-10-01', '2024-10-10']
+        #     try:
+        #         start_date = datetime.strptime(date_joined[0], "%Y-%m-%d")
+        #         end_date = datetime.strptime(date_joined[1], "%Y-%m-%d")
+        #         queryset = queryset.filter(date_joined__range=(start_date, end_date))
+        #     except Exception:
+        #         pass
+        return queryset.order_by("-date_joined").all()   # 不排序的话运行时会出现警告
+
+
     # 新增员工
-    def post(self, request):
+    def create(self, request, *args, **kwargs):
         # 如果用的是视图集，那么视图集会自动把request放到context中
         # 如果是直接继承自APIView，那么就需要手动将request对象传给serializer.context中
         serializer = AddStaffSerializer(data=request.data, context={'request': request})
@@ -98,10 +144,12 @@ class StaffView(APIView):
         else:
             return Response(data={'detail': list(serializer.errors.values())[0][0]}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
     def send_active_email(self, email):
         token = aes.encrypt(email)  # 将用户的邮箱用AES加密
         # /staff/active?token=xxx
-        active_path = reverse("staff:active_staff") + "?" + parse.urlencode({"token": token})
+        active_path = reverse("staff:active_staff") + "?" + parse.urlencode({"token": token})  # 对token进行编码
         # http://127.0.0.1:8000/staff/active?token=xxx
         active_url = self.request.build_absolute_uri(active_path)  # 构建绝对的uri
         # 发送一个链接，让用户点击这个链接后，跳转到激活的页面，才能激活。
