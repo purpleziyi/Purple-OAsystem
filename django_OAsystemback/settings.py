@@ -182,3 +182,11 @@ DEFAULT_FROM_EMAIL = 'zanezzy001@gmail.com'
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
 # 指定结果的接受地址
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/2'
+
+# 缓存设置
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/3",
+    }
+}

@@ -12,7 +12,7 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
 
-# @cache_page(60*15)
+# @cache_page(60*15)  # 函数形式缓存
 # def cache_demo_view(request):
 #     pass
 
@@ -51,7 +51,7 @@ class DepartmentStaffCountView(APIView):  # 返回部门员工数量
         # annotate用于新增一列staff_count， 通过values()来获取指定字段的值
         rows = OADepartment.objects.annotate(staff_count=Count("staffs")).values("name", "staff_count")
         # print(rows)
-        print('='*10)
+        print('='*10)  # 用于验证缓存是否生效，如果走了缓存，那么就不会执行此行代码
         return Response(rows)
 
 
