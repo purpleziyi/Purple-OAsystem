@@ -13,6 +13,6 @@ urlpatterns = [
     # path('staff', views.StaffView.as_view(), name='staff_view'),
     path('active', views.ActiveStaffView.as_view(), name='active_staff'),
     path('download', views.StaffDownloadView.as_view(), name='download_staff'),
-    # path('upload', views.StaffUploadView.as_view(), name='upload_staff'),
+    path('upload', views.StaffUploadView.as_view(), name='upload_staff'),
     path('test/celery', views.TestCeleryView.as_view(), name='test_celery')
 ] + router.urls

@@ -33,6 +33,22 @@ OAUser = get_user_model()
 
 aes = aeser.AESCipher(settings.SECRET_KEY)
 
+
+def send_active_email(request, email):
+    token = aes.encrypt(email)  # 将用户的邮箱用AES加密
+    # /staff/active?token=xxx
+    active_path = reverse("staff:active_staff") + "?" + parse.urlencode({"token": token})  # 对token进行编码
+    # http://127.0.0.1:8000/staff/active?token=xxx
+    active_url = request.build_absolute_uri(active_path)  # 构建绝对的uri
+    # 发送一个链接，让用户点击这个链接后，跳转到激活的页面，才能激活。
+    # 为了区分用户，在发送链接邮件中，该链接中应该要包含这个用户的邮箱
+    # 针对邮箱要进行加密：AES
+    # http://localhost:8000/staff/active?token=4dFLaXTbbzciZKGm0LIafmhOuuW11S+7kEtqdUSeFf4=
+    message = f"Please click the following link to activate your account: {active_url}"  # 账号激活
+    subject = f'[purpleOA] Account activation'
+    # send_mail(subject, recipient_list=[email], message=message, from_email=settings.DEFAULT_FROM_EMAIL)
+    send_mail_task.delay(email, subject, message)
+
 # Create your views here.
 class DepartmentListView(ListAPIView):
     queryset = OADepartment.objects.all()
@@ -142,7 +158,7 @@ class StaffViewSet(
 
             # 2. 发送激活邮件
             # send_mail(f'Ziyi active account', recipient_list=[email],message='Ziyi active account', from_email=settings.DEFAULT_FROM_EMAIL)
-            self.send_active_email(email)
+            send_active_email(request, email)
 
             return Response()
         else:
@@ -153,27 +169,12 @@ class StaffViewSet(
         return super().update(request, *args, **kwargs)
 
 
-
-    def send_active_email(self, email):
-        token = aes.encrypt(email)  # 将用户的邮箱用AES加密
-        # /staff/active?token=xxx
-        active_path = reverse("staff:active_staff") + "?" + parse.urlencode({"token": token})  # 对token进行编码
-        # http://127.0.0.1:8000/staff/active?token=xxx
-        active_url = self.request.build_absolute_uri(active_path)  # 构建绝对的uri
-        # 发送一个链接，让用户点击这个链接后，跳转到激活的页面，才能激活。
-        # 为了区分用户，在发送链接邮件中，该链接中应该要包含这个用户的邮箱
-        # 针对邮箱要进行加密：AES
-        # http://localhost:8000/staff/active?token=4dFLaXTbbzciZKGm0LIafmhOuuW11S+7kEtqdUSeFf4=
-        message = f"Please click the following link to activate your account: {active_url}"  #账号激活
-        subject = f'[purpleOA] Account activation'
-        # send_mail(subject, recipient_list=[email], message=message, from_email=settings.DEFAULT_FROM_EMAIL)
-        send_mail_task.delay(email, subject, message)
-
 class StaffDownloadView(APIView):
     def get(self, request):
         # /staff/download?pks=[x,y]
         # ['x','y'] -> json格式的字符串
         pks = request.query_params.get('pks')
+        print(pks)   # for debug!
         try:
             pks = json.loads(pks)
         except Exception:
@@ -191,9 +192,9 @@ class StaffDownloadView(APIView):
             queryset = queryset.filter(pk__in=pks)
             result = queryset.values("username", "email", "department__name", 'date_joined', 'status')  # 查找的时候如果是通过外键的话需要加两个_
             staff_df = pd.DataFrame(list(result))  # 将result转为DataFrame对象
-            # staff_df = staff_df.rename(
-            #     columns={"username": "Username", "email": 'Email', 'department__name': 'Department', "date_joined": 'Joining date',
-            #              'status': 'Status'})  # 英文版可能并不需要！
+            staff_df = staff_df.rename(
+                columns={"username": "Username", "email": 'Email', 'department__name': 'Department', "date_joined": 'Joining date',
+                         'status': 'Status'})  # 英文版可能并不需要？
             response = HttpResponse(content_type='application/xlsx')  # 返回的数据类型
             response['Content-Disposition'] = "attachment; filename=Employee Information.xlsx"  # 表示这个文件是作为附件形式来下载的，且名为“员工信息.xlsx”
             # 把staff_df写入到Response中
@@ -203,6 +204,56 @@ class StaffDownloadView(APIView):
         except Exception as e:
             print(e)
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StaffUploadView(APIView):
+    def post(self, request):
+        serializer = StaffUploadSerializer(data=request.data)
+        if serializer.is_valid(): # 验证成功
+            file = serializer.validated_data.get('file')
+            current_user = request.user
+            if current_user.department.name != 'Board' or current_user.department.leader_id != current_user.uid: # 既不是董事会也不是leader时
+                return Response({"detail": "You have no permission to access!"}, status=status.HTTP_403_FORBIDDEN)
+
+            # 有权限时，使用pandas读取文件
+            staff_df = pd.read_excel(file)
+            users = []
+            for index, row in staff_df.iterrows():  # iterrows是一个迭代器，每次循环时返回一行
+                # 获取部门
+                if current_user.department.name != 'Board':
+                    department = current_user.department
+                else:
+                    try:
+                        department = OADepartment.objects.filter(name=row['Department']).first()
+                        if not department:  # 以防将“部门”列写错
+                            return Response({"detail": f"{row['Department']}does not exist!"}, status=status.HTTP_400_BAD_REQUEST)
+                    except Exception as e:
+                        return Response({"detail": "Department-column does not exist!"}, status=status.HTTP_400_BAD_REQUEST)
+
+                try:
+                    email = row['Email']
+                    username = row['Name']
+                    password = "111111"
+                    user = OAUser(email=email, username=username, department=department, status=UserStatusChoices.INACTIVE)
+                    user.set_password(password)  # password不能在OAUser中指定，必须加密后再存储
+                    users.append(user)
+                except Exception:
+                    return Response({"detail": "Please check the email address,name,and department name in the document!"}, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                # 原子操作（事务），即要么全部user添加成功，要不全部没有成功，如果bulk_create(users)抛出异常了，那么事务就不会提交！
+                with transaction.atomic():
+                    # 统一把数据添加到数据库中， bulk_create是批量创建
+                    OAUser.objects.bulk_create(users)
+            except Exception:  # 比如，可能邮箱已经存在了
+                return Response({"detail": "Error in adding employee data!"}, status=status.HTTP_400_BAD_REQUEST)
+
+            # 异步给每个新增的员工发送邮件
+            for user in users:
+                send_active_email(request, user.email)
+            return Response()
+        else:  # 验证失败
+            detail = list(serializer.errors.values())[0][0]
+            return Response({"detail": detail}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TestCeleryView(APIView):

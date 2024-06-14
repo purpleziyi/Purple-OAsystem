@@ -40,3 +40,4 @@ class StaffUploadSerializer(serializers.Serializer):
         validators=[FileExtensionValidator(['xlsx', 'xls'])],
         error_messages={'required': 'Please upload a file!'}  #请上传文件！
     )
+
