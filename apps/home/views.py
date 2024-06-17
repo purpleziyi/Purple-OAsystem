@@ -45,7 +45,6 @@ class LatestAbsentView(APIView):
 
 
 class DepartmentStaffCountView(APIView):  # 返回部门员工数量
-
     @method_decorator(cache_page(60 * 15))
     def get(self, request):
         # annotate用于新增一列staff_count， 通过values()来获取指定字段的值
@@ -55,6 +54,6 @@ class DepartmentStaffCountView(APIView):  # 返回部门员工数量
         return Response(rows)
 
 
-class HealthCheckView(APIView):
-    def get(self, request):
-        return Response({"code": 200})
+# class HealthCheckView(APIView):
+#     def get(self, request):
+#         return Response({"code": 200})

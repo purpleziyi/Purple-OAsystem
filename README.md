@@ -10,6 +10,7 @@ The system features include **attendance management**, **notification management
 login
 ![login](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/043ad51e-6691-4956-ad7e-66f4a1c91409)
 
+
 <br/> 
 Personal attendance 
 
@@ -17,7 +18,8 @@ Personal attendance
 
 
 
-<br/> 
+<br/>
+
 Subordinate attendance
 
 ![Subordinate attendance](https://github.com/purpleziyi/Purple-OAsystem/assets/161695864/83c81b5b-0519-474d-9ce4-6ebc95c57df7)
